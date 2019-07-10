@@ -136,11 +136,11 @@ func (r *ReconcileAppService) Reconcile(request reconcile.Request) (reconcile.Re
 		return reconcile.Result{}, nil
 	}
 
-	oldspec := appv1.AppServiceSpec{}
-	if err := json.Unmarshal([]byte(instance.Annotations["spec"]), oldspec); err != nil {
-		return reconcile.Result{}, err
-	}
-
+//	oldspec := appv1.AppServiceSpec{}
+//	if err := json.Unmarshal([]byte(instance.Annotations["spec"]), oldspec); err != nil {
+//		return reconcile.Result{}, err
+//	}
+	oldspec := instance.Annotations["spec"]
 	if !reflect.DeepEqual(instance.Spec, oldspec) {
 		// 更新关联资源
 		newDeploy := resources.NewDeploy(instance)
