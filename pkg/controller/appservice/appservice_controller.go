@@ -136,7 +136,7 @@ func (r *ReconcileAppService) Reconcile(request reconcile.Request) (reconcile.Re
 		return reconcile.Result{}, nil
 	}
 
-	oldspec := appv1.AppServiceSpec{}
+	oldspec := &appv1.AppServiceSpec{}
 	if err := json.Unmarshal([]byte(instance.Annotations["spec"]), oldspec); err != nil {
 		return reconcile.Result{}, err
 	}
