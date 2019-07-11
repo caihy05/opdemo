@@ -158,7 +158,9 @@ func (r *ReconcileAppService) Reconcile(request reconcile.Request) (reconcile.Re
 		if err := r.client.Get(context.TODO(), request.NamespacedName, oldService); err != nil {
 			return reconcile.Result{}, err
 		}
+		clusterIP := oldService.Spec.ClusterIP
 		oldService.Spec = newService.Spec
+		oldService.Spec.ClusterIP = clusterIP
 		if err := r.client.Update(context.TODO(), oldService); err != nil {
 			return reconcile.Result{}, err
 		}
